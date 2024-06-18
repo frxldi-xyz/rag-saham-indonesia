@@ -1,9 +1,13 @@
 import argparse
+import os
 from langchain.vectorstores.chroma import Chroma
 from langchain.prompts import ChatPromptTemplate
 from langchain_community.llms.ollama import Ollama
+from langchain_community.llms import HuggingFaceHub
 
 from get_embedding_function import get_embedding_function
+
+# os.environ['HUGGINGFACEHUB_API_TOKEN']="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"
 
 CHROMA_PATH = "chroma"
 
@@ -41,6 +45,10 @@ def query_rag(query_text: str):
     # print(prompt)
 
     model = Ollama(model="mistral")
+    # model = HuggingFaceHub(
+    #     repo_id="mistralai/Mistral-7B-v0.1",
+    #     model_kwargs={"temperature":0.1,"max_length":250}
+    # )
     response_text = model.invoke(prompt)
 
     sources = [doc.metadata.get("id", None) for doc, _score in results]
