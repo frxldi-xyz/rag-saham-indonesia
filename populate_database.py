@@ -10,7 +10,7 @@ from langchain.vectorstores.chroma import Chroma
 
 
 CHROMA_PATH = "chroma"
-DATA_PATH = "test"
+DATA_PATH = "dataset"
 
 
 def main():
